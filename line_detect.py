@@ -81,14 +81,14 @@ class CentumXamlWriter:
         tagid = self.new_id()
         pts = f"0,0 {w},0 {w},{h} 0,{h}"
         self.elements.append(f'''
-        <yiapcspvgbdc:IPCSFillArea Tag="Id={tagid}" Fill="{fill}" Points="{pts}"
+        <yiapcspvgccbsc:IPCSFillArea Tag="Id={tagid}" Fill="{fill}" Points="{pts}"
         Canvas.Left="{int(x)}" Canvas.Top="{int(y)}"
         Stroke="#FF000000" StrokeThickness="1" />''')
 
         txt_id = self.new_id()
         self.elements.append(f'''
-        <yiapcspvgbdc:Text Tag="Id={txt_id}" Canvas.Left="{int(x+w/4)}"
-        Canvas.Top="{int(y+h/2.5)}" FontSize="10">{html.escape(text)}</yiapcspvgbdc:Text>''')
+        <yiapcspvgccbsc:Text Tag="Id={txt_id}" Canvas.Left="{int(x+w/4)}"
+        Canvas.Top="{int(y+h/2.5)}" FontSize="10">{html.escape(text)}</yiapcspvgccbsc:Text>''')
 
     def add_polyline(self, points):
         tagid = self.new_id()
@@ -103,24 +103,13 @@ class CentumXamlWriter:
 
         self.elements.append(f'''
         <yiapcspvgccbsc:IPCSPolyLine
-            Rotation="0"
-            Visibility="Visible"
-            Focusable="False"
-            RenderTransform="-1,0,0,1,0,0"
-            RenderTransformOrigin="0,0"
-            StrokeDashArray="5 3"
-            LineStyle="Dot"
             StrokeThickness="1"
             Tag="Id={tagid}"
-            ArrowEndStyle="Triangle"
-            ArrowSize="Small"
             Points="{pts_str}"
             Stroke="#FF000000"
             Canvas.Left="{min_x}"
             Canvas.Top="{min_y}"
-            Panel.ZIndex="50"
-            yiapcspvgbdc:ComponentProperties.Name="PolyLine{tagid}"
-            yiapcspvgbdc:ComponentProperties.LayerID="Normal Drawing Layer 1">
+            Panel.ZIndex="50">
             <yiapcspvggn:GenericNameComponent.GenericName>
                 <yiapcspvggn:GenericName />
             </yiapcspvggn:GenericNameComponent.GenericName>
@@ -128,74 +117,22 @@ class CentumXamlWriter:
         ''')
 
     def add_tank(self, x, y, w, h):
-        gid = self.new_id()
-        rid = self.new_id()
-        sid = self.new_id()
-        fid = self.new_id()
+        tagid = self.new_id()
+
+        # Draw a simple rectangle to represent the tank
+        pts = f"0,0 {w},0 {w},{h} 0,{h}"
 
         self.elements.append(f'''
-        <yiapcspvgbdc0:GroupComponent
-        Tag="Id={gid}"
-        Visibility="Visible"
-        Width="{w}"
-        Height="{h}"
-        Canvas.Left="{x}"
-        Canvas.Top="{y}"
-        Panel.ZIndex="30"
-        yiapcspvgccbsc:ComponentProperties.Name="TankGroup{gid}"
-        yiapcspvgccbsc:ComponentProperties.LayerID="Normal Drawing Layer 1">
-
-        <yiapcspvgccbsc:IPCSRectangle
-            Rotation="180"
-            Visibility="Visible"
-            Focusable="False"
-            RenderTransform="-1,1.22460635382238E-16,-1.22460635382238E-16,-1,0,0"
-            RenderTransformOrigin="0,0"
-            ShapeHeight="{h * 0.68}"
-            ShapeWidth="{w}"
-            Stroke="#00FFFFFF"
-            Tag="Id={rid}"
-            Fill="{{rcsr:iPCSBrushExtension Style=Gradient_0003, Color1=#FF646464, Color2=Silver}}"
-            Canvas.Left="{w}"
-            Canvas.Top="{h * 0.78}"
-            Panel.ZIndex="36"
-            yiapcspvgccbsc:ComponentProperties.Name="TankRect{rid}"
-            yiapcspvgccbsc:ComponentProperties.LayerID="Normal Drawing Layer 1" />
-
-        <yiapcspvgccbsc:IPCSSector
-            Rotation="0"
-            Visibility="Visible"
-            Focusable="False"
-            RenderTransform="-1,1.22460635382238E-16,1.22460635382238E-16,1,0,0"
-            RenderTransformOrigin="0,0"
-            Stroke="#00FFFFFF"
-            Tag="Id={sid}"
-            Fill="{{rcsr:iPCSBrushExtension Style=Gradient_0003, Color1=#FF646464, Color2=Silver}}"
-            IsLargeArc="True"
-            Size="{w/2},{h*0.10}"
-            Canvas.Left="{w}"
-            Canvas.Top="0"
-            Panel.ZIndex="38"
-            yiapcspvgccbsc:ComponentProperties.Name="TankTop{sid}"
-            yiapcspvgccbsc:ComponentProperties.LayerID="Normal Drawing Layer 1" />
-
         <yiapcspvgccbsc:IPCSFillArea
-            Rotation="-90"
-            Visibility="Visible"
-            Focusable="False"
-            RenderTransform="-6.12303176911189E-17,-1,-1,6.12303176911189E-17,0,0"
-            RenderTransformOrigin="0,0"
-            Stroke="#00FFFFFF"
-            Tag="Id={fid}"
-            Fill="{{rcsr:iPCSBrushExtension Style=Gradient_0004, Color1=#FF646464, Color2=Silver}}"
-            Points="0,0 {w},0 {w},{h/3} 0,{h/3}"
-            Canvas.Left="{w}"
-            Canvas.Top="{h}"
-            Panel.ZIndex="121"
-            yiapcspvgccbsc:ComponentProperties.Name="TankBottom{fid}"
-            yiapcspvgccbsc:ComponentProperties.LayerID="Normal Drawing Layer 1" />
-
-        </yiapcspvgbdc0:GroupComponent>
+            Tag="Id={tagid}"
+            Fill="#FFB0C4DE"
+            Points="{pts}"
+            Canvas.Left="{int(x)}"
+            Canvas.Top="{int(y)}"
+            Stroke="#FF000000"
+            StrokeThickness="2"
+            Panel.ZIndex="30">
+        </yiapcspvgccbsc:IPCSFillArea>
         ''')
 
 

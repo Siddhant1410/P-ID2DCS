@@ -4,9 +4,9 @@
         xmlns:rcsr="clr-namespace:Yokogawa.IA.iPCS.Platform.View.Graphic.Common.BrushExtension;assembly=Yokogawa.IA.iPCS.Platform.View.Graphic.Common.iPCSBrushExtension"
         xmlns:yiapcspvgccbsc="clr-namespace:Yokogawa.IA.iPCS.Platform.View.Graphic.Components.Controls.BasicShapeControls;assembly=Yokogawa.IA.iPCS.Platform.View.Graphic.Components.Controls.BasicShapeControls"
         xmlns:yiapcspvggn="clr-namespace:Yokogawa.IA.iPCS.Platform.View.Graphic.GenericName;assembly=Yokogawa.IA.iPCS.Platform.View.Graphic.GenericName"
-        xmlns:yiapcspvgccbsc0="clr-namespace:Yokogawa.IA.iPCS.Platform.View.Graphic.Builder.Designer.Component;assembly=Yokogawa.IA.iPCS.Platform.View.Graphic.Builder.Designer.Component">
-        
-        
+        xmlns:yiapcspvgbdc0="clr-namespace:Yokogawa.IA.iPCS.Platform.View.Graphic.Builder.Designer.Component;assembly=Yokogawa.IA.iPCS.Platform.View.Graphic.Builder.Designer.Component"
+>
+
         <yiapcspvgccbsc:IPCSFillArea Tag="Id=500" Fill="#FFD3D3D3" Points="0,0 44.829,0 44.829,32.184 0,32.184"
         Canvas.Left="1248" Canvas.Top="211"
         Stroke="#FF000000" StrokeThickness="1" />
@@ -49,7 +49,7 @@
         <yiapcspvgccbsc:Text Tag="Id=511" Canvas.Left="1443"
         Canvas.Top="612" FontSize="10">LIC</yiapcspvgccbsc:Text>
 
-        <yiapcspvgccbsc0:GroupComponent
+        <yiapcspvgbdc0:GroupComponent
         Tag="Id=512"
         Visibility="Visible"
         Width="184.82399999999998"
@@ -78,7 +78,7 @@
             yiapcspvgccbsc:ComponentProperties.LayerID="Normal Drawing Layer 1" />
 
         <yiapcspvgccbsc:IPCSSector
-            Rotation="180"
+            Rotation="0"
             Visibility="Visible"
             Focusable="False"
             RenderTransform="-1,1.22460635382238E-16,1.22460635382238E-16,1,0,0"
@@ -110,7 +110,7 @@
             yiapcspvgccbsc:ComponentProperties.Name="TankBottom515"
             yiapcspvgccbsc:ComponentProperties.LayerID="Normal Drawing Layer 1" />
 
-        </yiapcspvgccbsc0:GroupComponent>
+        </yiapcspvgbdc0:GroupComponent>
         
 
         <yiapcspvgccbsc:IPCSPolyLine
