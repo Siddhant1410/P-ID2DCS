@@ -1,0 +1,86 @@
+<Canvas
+    MaxHeight="10000" MaxWidth="10000" HorizontalAlignment="Center" VerticalAlignment="Center"
+    Width="2151" Height="984" Background="#FFC0C0C0" Tag="MaxId=609"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:yiapcspvgbdc="clr-namespace:Yokogawa.IA.iPCS.Platform.View.Graphic.Components.Controls.BasicShapeControls;assembly=Yokogawa.IA.iPCS.Platform.View.Graphic.Components.Controls.BasicShapeControls"
+    xmlns:yiapcspvgbdc0="clr-namespace:Yokogawa.IA.iPCS.Platform.View.Graphic.Builder.Designer.Component;assembly=Yokogawa.IA.iPCS.Platform.View.Graphic.Builder.Designer"
+    xmlns:yiapcspvggn="clr-namespace:Yokogawa.IA.iPCS.Platform.View.Graphic.GenericName;assembly=Yokogawa.IA.iPCS.Platform.View.Graphic.GenericName"
+    xmlns:yiapcspvgcp="clr-namespace:Yokogawa.IA.iPCS.Platform.View.Graphic.Common.Persistency;assembly=Yokogawa.IA.iPCS.Platform.View.Graphic.Common.Persistency">
+
+    <yiapcspvgbdc:Text FontSize="16" FontWeight="Bold" Visibility="Visible" Focusable="False" 
+        FontFamily="Arial" Foreground="#FFFF0000" Tag="Id=500" Canvas.Left="1248" Canvas.Top="211" 
+        yiapcspvgbdc0:ComponentProperties.Name="Text_500" 
+        yiapcspvgbdc0:ComponentProperties.LayerID="Normal Drawing Layer 1">
+        <yiapcspvggn:GenericNameComponent.GenericName>
+            <yiapcspvggn:GenericName />
+        </yiapcspvggn:GenericNameComponent.GenericName>FC</yiapcspvgbdc:Text>
+
+    <yiapcspvgbdc:IPCSFillArea Visibility="Visible" Focusable="False" Stroke="#FF000000" StrokeThickness="1" 
+        Tag="Id=501" Fill="#FFFFFFFF" Points="0,0 50,0 50,50 0,50" Canvas.Left="943" Canvas.Top="156" 
+        yiapcspvgbdc0:ComponentProperties.Name="PDT_Transmitter_501" 
+        yiapcspvgbdc0:ComponentProperties.LayerID="Normal Drawing Layer 1">
+        <yiapcspvggn:GenericNameComponent.GenericName>
+            <yiapcspvggn:GenericName />
+        </yiapcspvggn:GenericNameComponent.GenericName>
+    </yiapcspvgbdc:IPCSFillArea>
+
+    <yiapcspvgbdc:Text FontSize="9" FontWeight="Normal" Visibility="Visible" Focusable="False" 
+        FontFamily="Arial" Foreground="#FF000000" Tag="Id=502" Canvas.Left="948" Canvas.Top="171" 
+        yiapcspvgbdc0:ComponentProperties.Name="Text_502" 
+        yiapcspvgbdc0:ComponentProperties.LayerID="Normal Drawing Layer 1">
+        <yiapcspvggn:GenericNameComponent.GenericName>
+            <yiapcspvggn:GenericName />
+        </yiapcspvggn:GenericNameComponent.GenericName>PDT-3682</yiapcspvgbdc:Text>
+
+    <yiapcspvgbdc:IPCSFillArea Visibility="Visible" Focusable="False" Stroke="#FF000000" StrokeThickness="1" 
+        Tag="Id=503" Fill="#FFFFFF00" Points="0,0 70,0 70,50 0,50" Canvas.Left="938" Canvas.Top="116" 
+        yiapcspvgbdc0:ComponentProperties.Name="PDI_Indicator_503" 
+        yiapcspvgbdc0:ComponentProperties.LayerID="Normal Drawing Layer 1">
+        <yiapcspvggn:GenericNameComponent.GenericName>
+            <yiapcspvggn:GenericName />
+        </yiapcspvggn:GenericNameComponent.GenericName>
+    </yiapcspvgbdc:IPCSFillArea>
+
+    <yiapcspvgbdc:Text FontSize="10" FontWeight="Normal" Visibility="Visible" Focusable="False" 
+        FontFamily="Arial" Foreground="#FF000000" Tag="Id=504" Canvas.Left="948" Canvas.Top="126" 
+        yiapcspvgbdc0:ComponentProperties.Name="Text_504" 
+        yiapcspvgbdc0:ComponentProperties.LayerID="Normal Drawing Layer 1">
+        <yiapcspvggn:GenericNameComponent.GenericName>
+            <yiapcspvggn:GenericName />
+        </yiapcspvggn:GenericNameComponent.GenericName>PDI-3682</yiapcspvgbdc:Text>
+
+    <yiapcspvgbdc:IPCSFillArea Visibility="Visible" Focusable="False" Stroke="#FF000000" StrokeThickness="1" 
+        Tag="Id=505" Fill="#FFFF0000" Points="0,0 60,0 60,40 0,40" Canvas.Left="1253" Canvas.Top="170" 
+        yiapcspvgbdc0:ComponentProperties.Name="ESD_Box_505" 
+        yiapcspvgbdc0:ComponentProperties.LayerID="Normal Drawing Layer 1">
+        <yiapcspvggn:GenericNameComponent.GenericName>
+            <yiapcspvggn:GenericName />
+        </yiapcspvggn:GenericNameComponent.GenericName>
+    </yiapcspvgbdc:IPCSFillArea>
+
+    <yiapcspvgbdc:Text FontSize="12" FontWeight="Normal" Visibility="Visible" Focusable="False" 
+        FontFamily="Arial" Foreground="#FFFFFFFF" Tag="Id=506" Canvas.Left="1263" Canvas.Top="180" 
+        yiapcspvgbdc0:ComponentProperties.Name="Text_506" 
+        yiapcspvgbdc0:ComponentProperties.LayerID="Normal Drawing Layer 1">
+        <yiapcspvggn:GenericNameComponent.GenericName>
+            <yiapcspvggn:GenericName />
+        </yiapcspvggn:GenericNameComponent.GenericName>ESD</yiapcspvgbdc:Text>
+
+    <yiapcspvgbdc:IPCSFillArea Visibility="Visible" Focusable="False" Stroke="#FF000000" StrokeThickness="1" 
+        Tag="Id=507" Fill="#FFFFA500" Points="0,0 70,0 70,50 0,50" Canvas.Left="963" Canvas.Top="176" 
+        yiapcspvgbdc0:ComponentProperties.Name="LIC_Controller_507" 
+        yiapcspvgbdc0:ComponentProperties.LayerID="Normal Drawing Layer 1">
+        <yiapcspvggn:GenericNameComponent.GenericName>
+            <yiapcspvggn:GenericName />
+        </yiapcspvggn:GenericNameComponent.GenericName>
+    </yiapcspvgbdc:IPCSFillArea>
+
+    <yiapcspvgbdc:Text FontSize="10" FontWeight="Normal" Visibility="Visible" Focusable="False" 
+        FontFamily="Arial" Foreground="#FF000000" Tag="Id=508" Canvas.Left="973" Canvas.Top="186" 
+        yiapcspvgbdc0:ComponentProperties.Name="Text_508" 
+        yiapcspvgbdc0:ComponentProperties.LayerID="Normal Drawing Layer 1">
+        <yiapcspvggn:GenericNameComponent.GenericName>
+            <yiapcspvggn:GenericName />
+        </yiapcspvggn:GenericNameComponent.GenericName>LIC-3682</yiapcspvgbdc:Text>
+</Canvas>
