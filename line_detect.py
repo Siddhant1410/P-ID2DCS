@@ -70,13 +70,13 @@ class CentumXamlWriter:
 
     def header(self):
         return f"""<Canvas Width="{self.canvas_width}" Height="{self.canvas_height}"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:yiapcspvgbdc="clr-namespace:Yokogawa.IA.iPCS.Platform.View.Graphic.Components.Controls.BasicShapeControls;assembly=Yokogawa.IA.iPCS.Platform.View.Graphic.Components.Controls.BasicShapeControls"
-    xmlns:yiapcspvgbdc0="clr-namespace:Yokogawa.IA.iPCS.Platform.View.Graphic.Builder.Designer.Component;assembly=Yokogawa.IA.iPCS.Platform.View.Graphic.Builder.Designer">
-    xmlns:yiapcspvgccbsc="clr-namespace:Yokogawa.IA.iPCS.Platform.View.Graphic.Components.Controls.ComplexShapeControls;assembly=Yokogawa.IA.iPCS.Platform.View.Graphic.Components.Controls.ComplexShapeControls"
-    xmlns:yiapcspvggn="clr-namespace:Yokogawa.IA.iPCS.Platform.View.Graphic.Components.Controls.GenericNameControls;assembly=Yokogawa.IA.iPCS.Platform.View.Graphic.Components.Controls.GenericNameControls">"""
-
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:rcsr="clr-namespace:Yokogawa.IA.iPCS.Platform.View.Graphic.Common.BrushExtension;assembly=Yokogawa.IA.iPCS.Platform.View.Graphic.Common.iPCSBrushExtension"
+        xmlns:yiapcspvgccbsc="clr-namespace:Yokogawa.IA.iPCS.Platform.View.Graphic.Components.Controls.BasicShapeControls;assembly=Yokogawa.IA.iPCS.Platform.View.Graphic.Components.Controls.BasicShapeControls"
+        xmlns:yiapcspvggn="clr-namespace:Yokogawa.IA.iPCS.Platform.View.Graphic.GenericName;assembly=Yokogawa.IA.iPCS.Platform.View.Graphic.GenericName"
+        xmlns:yiapcspvgbdc0="clr-namespace:Yokogawa.IA.iPCS.Platform.View.Graphic.Builder.Designer.Component;assembly=Yokogawa.IA.iPCS.Platform.View.Graphic.Builder.Designer.Component">"""
+        
     def add_element(self, x, y, w, h, fill, text):
         tagid = self.new_id()
         pts = f"0,0 {w},0 {w},{h} 0,{h}"
@@ -142,8 +142,8 @@ class CentumXamlWriter:
         Canvas.Left="{x}"
         Canvas.Top="{y}"
         Panel.ZIndex="30"
-        yiapcspvgbdc:ComponentProperties.Name="TankGroup{gid}"
-        yiapcspvgbdc:ComponentProperties.LayerID="Normal Drawing Layer 1">
+        yiapcspvgccbsc:ComponentProperties.Name="TankGroup{gid}"
+        yiapcspvgccbsc:ComponentProperties.LayerID="Normal Drawing Layer 1">
 
         <yiapcspvgccbsc:IPCSRectangle
             Rotation="180"
@@ -159,11 +159,11 @@ class CentumXamlWriter:
             Canvas.Left="{w}"
             Canvas.Top="{h * 0.78}"
             Panel.ZIndex="36"
-            yiapcspvgbdc:ComponentProperties.Name="TankRect{rid}"
-            yiapcspvgbdc:ComponentProperties.LayerID="Normal Drawing Layer 1" />
+            yiapcspvgccbsc:ComponentProperties.Name="TankRect{rid}"
+            yiapcspvgccbsc:ComponentProperties.LayerID="Normal Drawing Layer 1" />
 
         <yiapcspvgccbsc:IPCSSector
-            Rotation="180"
+            Rotation="0"
             Visibility="Visible"
             Focusable="False"
             RenderTransform="-1,1.22460635382238E-16,1.22460635382238E-16,1,0,0"
@@ -176,8 +176,8 @@ class CentumXamlWriter:
             Canvas.Left="{w}"
             Canvas.Top="0"
             Panel.ZIndex="38"
-            yiapcspvgbdc:ComponentProperties.Name="TankTop{sid}"
-            yiapcspvgbdc:ComponentProperties.LayerID="Normal Drawing Layer 1" />
+            yiapcspvgccbsc:ComponentProperties.Name="TankTop{sid}"
+            yiapcspvgccbsc:ComponentProperties.LayerID="Normal Drawing Layer 1" />
 
         <yiapcspvgccbsc:IPCSFillArea
             Rotation="-90"
@@ -192,8 +192,8 @@ class CentumXamlWriter:
             Canvas.Left="{w}"
             Canvas.Top="{h}"
             Panel.ZIndex="121"
-            yiapcspvgbdc:ComponentProperties.Name="TankBottom{fid}"
-            yiapcspvgbdc:ComponentProperties.LayerID="Normal Drawing Layer 1" />
+            yiapcspvgccbsc:ComponentProperties.Name="TankBottom{fid}"
+            yiapcspvgccbsc:ComponentProperties.LayerID="Normal Drawing Layer 1" />
 
         </yiapcspvgbdc0:GroupComponent>
         ''')
@@ -249,12 +249,8 @@ def run_extraction_workflow(pdf_path):
     upper_brown = np.array([22, 255, 200])
     mask = cv2.inRange(hsv, lower_brown, upper_brown)
 
-    # REMOVE thin noise first
-    # kernel_open = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
-    # mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel_open, iterations=2)
-
     # THEN merge strokes
-    kernel_close = cv2.getStructuringElement(cv2.MORPH_RECT, (15, 15))
+    kernel_close = cv2.getStructuringElement(cv2.MORPH_RECT, (7, 7))
     mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel_close, iterations=1)
 
     # labels = cv2.connectedComponentsWithStats(mask, 8)[1]
@@ -270,7 +266,7 @@ def run_extraction_workflow(pdf_path):
         ys, xs = np.where(skel)
         pts = list(zip(xs, ys))
         print(f"[BROWN] Label {label}: skeleton points = {len(pts)}")
-        if len(pts) < 20:
+        if len(pts) < 5:
             continue
 
         pts.sort(key=lambda p: p[0])
@@ -294,4 +290,4 @@ def run_extraction_workflow(pdf_path):
     print("Main.xaml generated successfully.")
 
 # --------------------------------------------------
-run_extraction_workflow("subject2.pdf")
+run_extraction_workflow("subject3.pdf")
