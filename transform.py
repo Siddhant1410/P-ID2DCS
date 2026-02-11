@@ -73,6 +73,140 @@ class CentumXamlWriter:
         </Canvas>
     """
 
+    def header_frame(self):
+        self.elements.append(f"""
+        <yiapcspvgbdc0:GroupComponent
+        Visibility="Visible"
+        Width="2151"
+        Height="32"
+        Canvas.Left="0"
+        Canvas.Top="0"
+        Panel.ZIndex="1000"
+        yiapcspvgbdc:ComponentProperties.Name="Auto_Header"
+        yiapcspvgbdc:ComponentProperties.LayerID="Normal Drawing Layer 1">
+
+        <!-- Blue header bar -->
+        <yiapcspvgccbsc:IPCSRectangle
+            ShapeHeight="32"
+            ShapeWidth="2151"
+            Stroke="#00FFFFFF"
+            Fill="#FF0062C4"
+            Canvas.Left="0"
+            Canvas.Top="0"
+            Panel.ZIndex="1001" />
+
+        <!-- Title -->
+        <yiapcspvgccdc:ProcessDataCharacter
+            FontSize="24"
+            FontWeight="Bold"
+            FontFamily="Arial"
+            Height="28"
+            Width="1359"
+            Alignment="Center"
+            Foreground="#FFC0C0C0"
+            Canvas.Left="396"
+            Canvas.Top="2"
+            Panel.ZIndex="1002">
+            <yiapcspvggn:GenericNameComponent.GenericName>
+                <yiapcspvggn:GenericName
+                    GenericNames="VRC OUTLET SCRUBBER - TRAIN 2" />
+            </yiapcspvggn:GenericNameComponent.GenericName>
+        </yiapcspvgccdc:ProcessDataCharacter>
+        </yiapcspvgbdc0:GroupComponent>
+        """)
+
+    def texts(self):
+        self.elements.append(f"""
+         <yiapcspvgccbsc:Text
+            FontSize="24"
+            Visibility="Visible"
+            Focusable="False"
+            FontFamily="Calibri"
+            MinHeight="0"
+            MinWidth="0"
+            Padding="0,0,0,0"
+            Foreground="#FF000000"
+            ScaleX="1"
+            ScaleY="1"
+            Canvas.Left="1530"
+            Canvas.Top="350"
+            Panel.ZIndex="95"
+            yiapcspvgbdc:ComponentProperties.Name="Text9"
+            yiapcspvgbdc:ComponentProperties.LayerID="Normal Drawing Layer 18">HP Flare Hdr
+        </yiapcspvgccbsc:Text>
+    <yiapcspvgccbsc:Text
+        FontSize="24"
+        Visibility="Visible"
+        Focusable="False"
+        FontFamily="Calibri"
+        MinHeight="0"
+        MinWidth="0"
+        Padding="0,0,0,0"
+        Foreground="#FF000000"
+        ScaleX="1"
+        ScaleY="1"
+        Canvas.Left="1530"
+        Canvas.Top="240"
+        Panel.ZIndex="96"
+        yiapcspvgbdc:ComponentProperties.Name="Text12"
+        yiapcspvgbdc:ComponentProperties.LayerID="Normal Drawing Layer 18"
+        xml:space="preserve">RcVrd Gas to 
+GLC I/L Mnfd</yiapcspvgccbsc:Text>
+    <yiapcspvgccbsc:Text
+        FontSize="24"
+        Visibility="Visible"
+        Focusable="False"
+        FontFamily="Calibri"
+        MinHeight="0"
+        MinWidth="0"
+        Padding="0,0,0,0"
+        Foreground="#FF000000"
+        ScaleX="1"
+        ScaleY="1"
+        Canvas.Left="1510"
+        Canvas.Top="760"
+        Panel.ZIndex="97"
+        yiapcspvgbdc:ComponentProperties.Name="Text16"
+        yiapcspvgbdc:ComponentProperties.LayerID="Normal Drawing Layer 18"
+        xml:space="preserve">Cold to 4th stage 
+Scrub Tr-2</yiapcspvgccbsc:Text>
+    <yiapcspvgccbsc:Text
+        FontSize="24"
+        Visibility="Visible"
+        Focusable="False"
+        FontFamily="Calibri"
+        MinHeight="0"
+        MinWidth="0"
+        Padding="0,0,0,0"
+        Foreground="#FF000000"
+        ScaleX="1"
+        ScaleY="1"
+        Canvas.Left="160"
+        Canvas.Top="470"
+        Panel.ZIndex="98"
+        yiapcspvgbdc:ComponentProperties.Name="Text20"
+        yiapcspvgbdc:ComponentProperties.LayerID="Normal Drawing Layer 18"
+        xml:space="preserve">Rcvrd Gas Frm 
+VRC 4th Stage Tr-2</yiapcspvgccbsc:Text>
+    <yiapcspvgccbsc:Text
+        FontSize="28"
+        FontWeight="Bold"
+        Visibility="Visible"
+        Focusable="False"
+        FontFamily="Calibri"
+        MinHeight="0"
+        MinWidth="0"
+        Padding="0,0,0,0"
+        Foreground="#FF000000"
+        ScaleX="1"
+        ScaleY="1"
+        Canvas.Left="770"
+        Canvas.Top="0"
+        Panel.ZIndex="99"
+        yiapcspvgbdc:ComponentProperties.Name="Text23"
+        yiapcspvgbdc:ComponentProperties.LayerID="Normal Drawing Layer 18">VRC OUTLET SCRUBBER - TRAIN 2</yiapcspvgccbsc:Text>
+        """)
+
     def header(self):
         return f"""
     <!--PlatformRevisionProperties.PlatformFileRevision:0x0002-->
@@ -132,7 +266,7 @@ class CentumXamlWriter:
 
         self.elements.append(f'''
         <yiapcspvgccbsc:IPCSPolyLine
-            StrokeThickness="1"
+            StrokeThickness="2"
             Tag="Id={tagid}"
             ArrowEndStyle="Triangle"
             ArrowSize="Small"
@@ -141,7 +275,7 @@ class CentumXamlWriter:
             Canvas.Left="{min_x}"
             Canvas.Top="{min_y}"
             Panel.ZIndex="50"
-            yiapcspvgbdc:ComponentProperties.Name="PolyLine"
+            yiapcspvgbdc:ComponentProperties.Name="PolyLine_{tagid}"
             yiapcspvgbdc:ComponentProperties.LayerID="Normal Drawing Layer 1">
             <yiapcspvggn:GenericNameComponent.GenericName>
                 <yiapcspvggn:GenericName />
@@ -249,81 +383,118 @@ class CentumXamlWriter:
         # Remove newlines and extra spaces
         return " ".join(expr_string.split())
 
-    def add_tank(self, x, y, w, h):
+    def add_tank(self, x, y):
+        """
+        Draws a Centum tank with level bar.
+        x, y = top-left of the tank body (NOT centered)
+        """
+
+        # -------------------------
+        # Fixed dimensions (from XAML)
+        # -------------------------
+        TANK_W = 155.999999708606
+        TANK_H = 478.999425128174
+
+        BODY_TOP = 53.809057398134
+        BODY_H   = 371.77270012602276
+
+        SEMI_RX = TANK_W / 2
+        SEMI_RY = 54.7875558080455
+
+        # Level bar offsets (relative to tank)
+        BAR_W = 20
+        BAR_H = 88
+        BAR_X_OFFSET = 20
+        BAR_Y_OFFSET = 233
+
         gid = self.new_id()
-        rect_id = self.new_id()
-        top_id = self.new_id()
-        bot_id = self.new_id()
 
-        # ---- Ratios from reference
-        BODY_TOP_RATIO = 53.809057398134 / 478.999425128174
-        BODY_HEIGHT_RATIO = 371.77270012602276 / 478.999425128174
-        SEMI_HEIGHT_RATIO = 54.7875558080455 / 478.999425128174
+        self.elements.append(f"""
+    <yiapcspvgbdc0:GroupComponent
+        Tag="Id={gid}"
+        Visibility="Visible"
+        Width="{TANK_W}"
+        Height="{TANK_H}"
+        Canvas.Left="{x}"
+        Canvas.Top="{y}"
+        Panel.ZIndex="103"
+        yiapcspvgbdc:ComponentProperties.Name="AutoTank_{gid}"
+        yiapcspvgbdc:ComponentProperties.LayerID="Normal Drawing Layer 1">
 
-        body_top = h * BODY_TOP_RATIO
-        body_height = h * BODY_HEIGHT_RATIO
+        <!-- Tank body -->
+        <yiapcspvgccbsc:IPCSRectangle
+            ShapeHeight="{BODY_H}"
+            ShapeWidth="{TANK_W}"
+            Stroke="#00FFFFFF"
+            Fill="{{rcsr:iPCSBrushExtension Style=Gradient_0003, Color1=#FF646464, Color2=Silver}}"
+            Canvas.Left="0"
+            Canvas.Top="{BODY_TOP}"
+            Panel.ZIndex="112" />
 
-        semi_rx = w / 2
-        semi_ry = h * SEMI_HEIGHT_RATIO
-
-        # IMPORTANT: sector must be centered
-        sector_left = 0
-
-        self.elements.append(f'''
-        <yiapcspvgbdc0:GroupComponent
-            Tag="Id=191"
-            Visibility="Visible"
-            Width="{w}"
-            Height="{h}"
-            Canvas.Left="{x}"
-            Canvas.Top="{y}"
-            Panel.ZIndex="103"
-            yiapcspvgbdc:ComponentProperties.Name="AutoTank_1234_{gid}"
-            yiapcspvgbdc:ComponentProperties.LayerID="Normal Drawing Layer 1">
-
-            <!-- Cylindrical body -->
-            <yiapcspvgccbsc:IPCSRectangle
-                Tag="Id=192"
-                ShapeWidth="{w}"
-                ShapeHeight="{body_height}"
-                Fill="{{rcsr:iPCSBrushExtension Style=Gradient_0003, Color1=#FF646464, Color2=Silver}}"
-                Stroke="#00FFFFFF"
-                Canvas.Left="0"
-                Canvas.Top="{body_top}"
-                Panel.ZIndex="112" />
-
-            <!-- Top semicircle -->
-            <yiapcspvgccbsc:IPCSSector
-                Tag="Id=193;R50300"
-                IsLargeArc="True"
-                Size="{semi_rx},{semi_ry}"
-                StartPoint="{w},{semi_ry}"
-                EndPoint="0,{semi_ry}"
-                SweepDirection="Counterclockwise"
-                Fill="{{rcsr:iPCSBrushExtension Style=Gradient_0003, Color1=#FF646464, Color2=Silver}}"
-                Stroke="#00FFFFFF"
-                Canvas.Left="{sector_left}"
-                Canvas.Top="0"
-                Panel.ZIndex="113" />
-
-            <!-- Bottom semicircle -->
-            <yiapcspvgccbsc:IPCSSector
-            Tag="Id=194;R50300"
+        <!-- Top semicircle -->
+        <yiapcspvgccbsc:IPCSSector
             IsLargeArc="True"
-            Size="{semi_rx},{semi_ry}"
-            StartPoint="0,0"
-            EndPoint="{w},0"
+            Size="{SEMI_RX},{SEMI_RY}"
+            StartPoint="{TANK_W},{SEMI_RY}"
+            EndPoint="0,{SEMI_RY}"
+            SweepDirection="Counterclockwise"
+            Stroke="#00FFFFFF"
+            Fill="{{rcsr:iPCSBrushExtension Style=Gradient_0003, Color1=#FF646464, Color2=Silver}}"
+            Canvas.Left="0"
+            Canvas.Top="0"
+            Panel.ZIndex="113" />
+
+        <!-- Bottom semicircle -->
+        <yiapcspvgccbsc:IPCSSector
+            IsLargeArc="True"
+            Size="{SEMI_RX},{SEMI_RY}"
+            StartPoint="{TANK_W},{SEMI_RY}"
+            EndPoint="0,{SEMI_RY}"
+            SweepDirection="Counterclockwise"
             RenderTransform="1,0,0,-1,0,0"
             RenderTransformOrigin="0,0"
-            SweepDirection="Clockwise"
-            Fill="{{rcsr:iPCSBrushExtension Style=Gradient_0003, Color1=#FF646464, Color2=Silver}}"
             Stroke="#00FFFFFF"
+            Fill="{{rcsr:iPCSBrushExtension Style=Gradient_0003, Color1=#FF646464, Color2=Silver}}"
             Canvas.Left="0"
-            Canvas.Top="{body_top + body_height}"
+            Canvas.Top="{TANK_H}"
             Panel.ZIndex="114" />
 
+        <!-- ================= LEVEL BAR ================= -->
+
+        <yiapcspvgbdc0:GroupComponent
+            Visibility="Visible"
+            Width="{BAR_W}"
+            Height="{BAR_H}"
+            Canvas.Left="{BAR_X_OFFSET}"
+            Canvas.Top="{BAR_Y_OFFSET}"
+            Panel.ZIndex="135"
+            yiapcspvgbdc:ComponentProperties.Name="LevelBar_{gid}"
+            yiapcspvgbdc:ComponentProperties.LayerID="Normal Drawing Layer 1">
+
+            <yiapcspvgccbsc:IPCSRectangle
+                ShapeHeight="88"
+                ShapeWidth="20"
+                Stroke="#00FFFFFF"
+                StrokeThickness="3"
+                Fill="{{rcsr:iPCSBrushExtension Style=Gradient_0003, Color1=#333333, Color2=#F2F2F2}}"
+                Canvas.Left="0"
+                Canvas.Top="0"
+                Panel.ZIndex="108" />
+
+            <yiapcspvgccbsc:IPCSRectangle
+                ShapeHeight="84"
+                ShapeWidth="16"
+                Stroke="#FF000000"
+                StrokeThickness="1"
+                Fill="#FF000000"
+                Canvas.Left="2"
+                Canvas.Top="2"
+                Panel.ZIndex="109" />
+
         </yiapcspvgbdc0:GroupComponent>
-    ''')
+
+    </yiapcspvgbdc0:GroupComponent>
+    """)
 
     def add_lic(self, cx, cy, ctr_tag, cv_tag):
         """
@@ -565,6 +736,8 @@ class CentumXamlWriter:
     def to_file(self, filename="Main.xaml"):
         with open(filename, "w") as f:
             f.write(self.header())
+            self.header_frame()
+            self.texts()
             f.write("\n".join(self.elements))
             f.write(self.footer())
 
@@ -594,20 +767,25 @@ def run_extraction_workflow(pdf_path):
                 sw, sh = w * scale_x, h * scale_y
 
                 if "TANK" in name:
-                    writer.add_tank(sx, sy, sw, sh)
-                elif "ESD" in name:
-                    writer.add_esd(sx, sy, sw, sh)
-                elif "LIC" in name:
-                    cx = sx + sw / 2
-                    cy = sy + sh / 2
-                    writer.add_lic(cx, cy, None, None)
+                    writer.add_tank(sx, sy)
                 else:
-                    writer.add_dvalve(sx, sy, sw, sh)
-                    # fill = "#FFD3D3D3"
-                    # if "LIC" in name:
-                    #     fill = "#FFFFA500"
+                    # Ignore symbol type, always draw control valve
+                    writer.add_lic(
+                        cx=sx + sw / 2,
+                        cy=sy + sh / 2,
+                        ctr_tag="",
+                        cv_tag=""
+                    )
 
-                    # writer.add_element(sx, sy, sw, sh, fill, name)
+                
+                # elif "ESD" in name:
+                #     writer.add_esd(sx, sy, sw, sh)
+                # elif "LIC" in name:
+                #     cx = sx + sw / 2
+                #     cy = sy + sh / 2
+                #     writer.add_lic(cx, cy, None, None)
+                # else:
+                #     writer.add_dvalve(sx, sy, sw, sh)
                 
                 symbol_count[name] = symbol_count.get(name, 0) + 1
                 print(f"[SYMBOL] {name} @ ({sx:.1f}, {sy:.1f}) size=({sw:.1f}x{sh:.1f})")
